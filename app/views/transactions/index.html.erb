@@ -13,13 +13,11 @@ Balance for Anthony: 1456 KC
 Balance for Krystina: 3516 KC 
 -->
 
-<p>
+<ul>
 <%
 transactions = Transaction.all
-for transaction in transactions
-from_user = transaction["from_user_id"]
-from = User.find_by({"id"=>from_user})["name"]%>
-<%=from%>
+for transaction in transactions%>
+<li><%=from_user = transaction["from_user_id"]%></li>
 <%end%>
-</p>
+</ul>
 
