@@ -16,8 +16,9 @@ Balance for Krystina: 3516 KC
 <ul>
 <%
 transactions = Transaction.all
-for transaction in transactions%>
-<li><%=from_user = transaction["from_user_id"]%></li>
-<%end%>
+for transaction in transactions
+from_user = transaction["from_user_id"]
+"#{from_user}"
+end%>
 </ul>
 
