@@ -17,10 +17,11 @@ Balance for Krystina: 3516 KC
 <%
 transactions = Transaction.all
 for transaction in transactions
-from_user = transaction["from_user_id"]
-if from_user == nil
+from_user_id = transaction["from_user_id"]
+if from_user_id == nil
 from_user = "ICO"
 else
+from_user = User.find_by({"id"=>from_user_id})["name"]
 end%>
 <li><%="#{from_user}"%></li>
 <%end%>
