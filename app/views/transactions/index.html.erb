@@ -15,6 +15,7 @@ Balance for Krystina: 3516 KC
 
 <ul>
 <%
+counter = 0
 transactions = Transaction.all
 for transaction in transactions
 from_user_id = transaction["from_user_id"]
@@ -22,8 +23,33 @@ if from_user_id == nil
 from_user = "ICO"
 else
 from_user = User.find_by({"id"=>from_user_id})["name"]
-end%>
-<li><%="#{from_user}"%></li>
+end
+
+to_user_id = transaction["to_user_id"]
+to_user = User.find_by({"id"=>to_user_id})["name"]
+
+amount = transaction["amount"]
+counter = counter + 1
+%>
+<strong><%="Transaction: #{counter}"%></strong>
+<li><%="From User: #{from_user}"%></li>
+<li><%="To User: #{to_user}"%></li>
+<li><%="Amount: #{amount}"%></li>
+<p></p>
 <%end%>
+</ul>
+
+<ul>
+<%
+brian_id = User.find_by({"name"=>"Brian"})
+brian_balance = Transaction.where({"to_user_id"=>brian_id}).sum("amount") -
+Transaction.where({"from_user_id"=>brian_id}).sum("amount")%>
+<li><%="Brian Balance: #{brian_balance}"%></li>
+
+<%
+ben_id = User.find_by({"name"=>"Ben"})
+ben_balance = Transaction.where({"to_user_id"=>ben_id}).sum("amount") -
+Transaction.where({"from_user_id"=>ben_id}).sum("amount")%>
+<li><%="Ben Balance: #{ben_balance}"%></li>
 </ul>
 
